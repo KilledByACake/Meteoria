@@ -1,17 +1,36 @@
 import pgzrun
 import math
 import pygame
+import json
 from terrain import Terrain
 from collectibles import create_manager
-from assets import build_frames  # scale_to_max not needed here
+from assets import build_frames  # image scaling helper
+
+HS_FILE = "highscore.json"  # saved next to main.py
 
 WIDTH = 480
 HEIGHT = 720
 TITLE = "Endless Biker in Finland Tester"
 
 FPS = 60
-TIMER_SEC = 10            # 10s for testing; set 120 for 2 minutes
-MESSAGE_DURATION_SEC = 3  # messages show for 3 seconds
+TIMER_SEC = 10            # set 120 for 2 minutes
+MESSAGE_DURATION_SEC = 3  # pickup messages show for 3 seconds
+
+# High score I/O
+def load_highscore():
+    try:
+        with open(HS_FILE, "r") as f:
+            data = json.load(f)
+            return int(data.get("high_score", 0))
+    except Exception:
+        return 0
+
+def save_highscore(value):
+    try:
+        with open(HS_FILE, "w") as f:
+            json.dump({"high_score": int(value)}, f)
+    except Exception:
+        pass
 
 # Terrain
 terrain = Terrain(WIDTH, HEIGHT, FPS)
@@ -42,6 +61,7 @@ energy_total = 0.0
 
 timer_frames = TIMER_SEC * FPS
 game_over = False
+high_score = load_highscore()
 
 # Collectibles
 collectibles = create_manager(
@@ -104,6 +124,7 @@ def draw():
     ss = seconds_left % 60
     screen.draw.text(f"Time: {mm:02d}:{ss:02d}", (10, 10), color="black")
     screen.draw.text(f"Energy (score): {int(energy_total)}", (10, 30), color="black")
+    screen.draw.text(f"High score: {int(high_score)}", (10, 50), color="black")
 
     if game_over:
         screen.draw.textbox(
@@ -118,7 +139,7 @@ def draw():
 def update():
     global runner_speed, frame_counter, camera_x
     global runner_angle_rad, runner_anchor_y
-    global energy_total, timer_frames, game_over
+    global energy_total, timer_frames, game_over, high_score
 
     if game_over:
         return
@@ -161,10 +182,13 @@ def update():
     collectibles.maybe_spawn(energy_total, camera_x, WIDTH, terrain.get_ground_height)
     collectibles.update(camera_x, runner.x, runner_anchor_y)
 
-    # Timer
+    # Timer and high score update
     timer_frames -= 1
     if timer_frames <= 0:
         game_over = True
+        if int(energy_total) > int(high_score):
+            high_score = int(energy_total)
+            save_highscore(high_score)
 
 def on_key_down(key):
     if key == keys.R and game_over:
