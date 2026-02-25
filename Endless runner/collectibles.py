@@ -3,11 +3,11 @@ import pygame
 # Default collectibles configuration
 ITEMS_CONFIG = {
     "headset": {
-        "energy": 400,
+        "energy": 300,
         "message": "You would need to bike for 90 more minutes to charge a headset!",
     },
     "telefon": {
-        "energy": 600,
+        "energy": 1000,
         "message": "You need to bike 4 minutes to charge a full phone!",
     },
 }
