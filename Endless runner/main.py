@@ -1,97 +1,106 @@
-import pgzrun  # imports pygame zero module
-import math    # imports math module for mathematical functions
-import pygame  # for image scaling
+import pgzrun
+import math
+import pygame
 
-# Constant Settings for size
+# Window
 WIDTH = 480
 HEIGHT = 720
 TITLE = "Endless Biker in Finland Tester"
 
-# Visual background rectangles (not used for physics)
-sky = Rect(0, 0, WIDTH, HEIGHT // 2)
-ground = Rect(0, HEIGHT // 2, WIDTH, HEIGHT // 2)
+# Motion / camera
+runner_speed = 5
+frame_counter = 0
+camera_x = 0
 
-# Movement / physics variables
-runner_speed = 5          # horizontal speed
-frame_counter = 0         # update counter
-camera_x = 0              # world offset (endless effect)
-
-# Terrain function: returns ground height at world x
+# Terrain
 def get_ground_height(x):
     return HEIGHT // 2 + math.sin(x * 0.01) * 50
-    # base: HEIGHT//2, amplitude: 50, wavelength factor: 0.01
 
-# Actor: Bicycler (for position only)
+# Actor (position only)
 runner = Actor("bicycler1")
-runner.anchor = ('center', 'bottom')  # bottom-center anchor (for bottom positioning)
-runner.x = 100
+runner.x = 140
 runner.index = 0
 runner.images = ["bicycler1", "bicycler2", "bicycler3"]
-runner.image = runner.images[0]
-runner.bottom = int(get_ground_height(runner.x))  # ensure visible before first draw
 
-# Scale animation frames to a comfortable on-screen size
-RUNNER_TARGET_HEIGHT = 50  # adjust to taste (e.g., 160–260)
-
-def make_scaled_frames(names, target_height):
+# Scale frames
+RUNNER_TARGET_HEIGHT = 80  # make smaller/larger here
+def make_scaled_frames(names, target_h):
     frames = []
     for name in names:
-        surf = images.load(name)  # Pygame Zero image surface
+        surf = images.load(name)
         w, h = surf.get_size()
-        factor = target_height / h
-        new_size = (int(w * factor), int(h * factor))
-        frames.append(pygame.transform.smoothscale(surf, new_size))
+        factor = target_h / h
+        frames.append(pygame.transform.smoothscale(surf, (int(w*factor), int(h*factor))))
     return frames
 
-runner_frames = make_scaled_frames(runner.images, RUNNER_TARGET_HEIGHT)
-print("runner original size:", images.load("bicycler1").get_size(),
-      "scaled size:", runner_frames[0].get_size())
+frames = make_scaled_frames(runner.images, RUNNER_TARGET_HEIGHT)
+W, H = frames[0].get_size()
 
-# Actor: Monument (elk)
-elk = Actor("elk")
-elk.bottomleft = (600, HEIGHT // 2 + 20)
+# Bike geometry (tune to your image)
+WHEEL_BASE = int(0.55 * W)  # horizontal distance between wheel contact points
+MARGIN_BOTTOM = 0           # pixels from image bottom to wheel contact line (crop-tight -> 0)
+
+# State
+runner_angle_rad = 0.0
+runner_anchor_y = int(get_ground_height(runner.x))  # midpoint between wheels
 
 def draw():
     screen.clear()
     screen.fill("skyblue")
 
-    # Draw dynamic ground using camera_x to convert screen x -> world x
-    for x in range(WIDTH):
-        world_x = x + camera_x
-        y = int(get_ground_height(world_x))
-        screen.draw.line((x, y), (x, HEIGHT), (0, 250, 154))
+    # Ground
+    for sx in range(WIDTH):
+        wx = sx + camera_x
+        y = int(get_ground_height(wx))
+        screen.draw.line((sx, y), (sx, HEIGHT), (0, 250, 154))
 
-    # Draw runner with midbottom anchoring
-    surf = runner_frames[runner.index]
-    rect = surf.get_rect(midbottom=(runner.x, runner.bottom))
-    screen.blit(surf, rect)
+    # Current frame and rotation
+    surf = frames[runner.index]
+    angle_deg = -math.degrees(runner_angle_rad)
+    rot = pygame.transform.rotozoom(surf, angle_deg, 1.0)
 
-    # Draw elk relative to camera position
-    elk.x = 600 - camera_x
-    elk.draw()
+    # Offset from image center to the midpoint of the wheel-bottom line (unrotated coords)
+    center_to_anchor = pygame.Vector2(0, H/2 - MARGIN_BOTTOM)
+    # Rotate that offset with the same angle used by rotozoom (screen coords)
+    rot_offset = center_to_anchor.rotate(angle_deg)
+
+    # Final blit position so wheels sit on ground (subtract the rotated offset)
+    cx = runner.x - rot_offset.x
+    cy = runner_anchor_y - rot_offset.y
+    rect = rot.get_rect(center=(cx, cy))
+    screen.blit(rot, rect)
+
+    # Debug: wheel contact points (should sit on ground)
+    d = WHEEL_BASE
+    offL = pygame.Vector2(-d/2, 0).rotate(angle_deg)
+    offR = pygame.Vector2(+d/2, 0).rotate(angle_deg)
+    wheelL = (runner.x + offL.x, runner_anchor_y + offL.y)
+    wheelR = (runner.x + offR.x, runner_anchor_y + offR.y)
 
 def update():
-    global runner_speed, frame_counter, camera_x
+    global runner_speed, frame_counter, camera_x, runner_angle_rad, runner_anchor_y
 
-    # Animation: change frame every 10 updates
+    # Animation
     frame_counter += 1
     if frame_counter % 10 == 0:
-        runner.index = (runner.index + 1) % len(runner_frames)
+        runner.index = (runner.index + 1) % len(frames)
 
-    # Terrain slope calculation at runner's world x
-    current_height = get_ground_height(camera_x + runner.x)
-    next_height = get_ground_height(camera_x + runner.x + 1)
-    slope = next_height - current_height  # >0 uphill, <0 downhill
+    # Sample terrain at wheel positions (world x)
+    d = WHEEL_BASE
+    xL = camera_x + runner.x - d/2
+    xR = camera_x + runner.x + d/2
+    yL = get_ground_height(xL)
+    yR = get_ground_height(xR)
 
-    # Speed adjustment by slope + simple friction and clamping
-    runner_speed -= slope * 0.05
+    # Tilt angle and speed
+    runner_angle_rad = math.atan2(yR - yL, d)
+    slope = (yR - yL) / d
+    runner_speed -= slope * 0.6   # adjust to taste
     runner_speed *= 0.99
     runner_speed = max(2, min(runner_speed, 10))
-
-    # Move the world (endless runner effect)
     camera_x += runner_speed
 
-    # Stick runner to ground using bottom
-    runner.bottom = int(get_ground_height(camera_x + runner.x))
+    # Anchor at the midpoint between the two heights
+    runner_anchor_y = (yL + yR) / 2
 
-pgzrun.go()  # executes the game loop
+pgzrun.go()
