@@ -2,11 +2,11 @@ import pgzrun
 import math
 import pygame
 from datetime import datetime
-from Classes.terrain import Terrain
-from Classes.collectibles import create_manager
-from Classes.assets import build_frames
-from Classes.highscores import load_store, add_score_with_ranks  # no best_* imports now
-from Classes.cycler import Cycler
+from modules.terrain import Terrain
+from modules.collectibles import create_manager
+from modules.assets import build_frames
+from modules.highscores import load_store, add_score_with_ranks  # no best_* imports now
+from modules.cycler import Cycler
 
 WIDTH = 480
 HEIGHT = 720
