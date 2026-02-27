@@ -6,6 +6,7 @@ from Classes.terrain import Terrain
 from Classes.collectibles import create_manager
 from Classes.assets import build_frames
 from Classes.highscores import load_store, add_score_with_ranks  # no best_* imports now
+from Classes.cycler import Cycler
 
 WIDTH = 480
 HEIGHT = 720
@@ -21,15 +22,11 @@ PLAYER_NAME = "PlayerOne"
 terrain = Terrain(WIDTH, HEIGHT, FPS)
 
 # Cyclist
-runner = Actor("bicycler1")
-runner.x = 140
-runner.index = 0
-runner.images = ["bicycler1", "bicycler2", "bicycler3"]
-RUNNER_TARGET_HEIGHT = 80
-frames = build_frames(images.load, runner.images, RUNNER_TARGET_HEIGHT)
-W, H = frames[0].get_size()
-WHEEL_BASE = int(0.55 * W)
-MARGIN_BOTTOM = 0
+runner = Cycler(
+    images=["bicycler1", "bicycler2", "bicycler3"],
+    build_frames=build_frames,
+    image_loader = images.load
+)
 
 # Motion / game state
 runner_speed = 5
@@ -125,6 +122,7 @@ def build_rank_message(ranks):
 def draw():
     screen.clear()
     screen.fill("skyblue")
+    runner.draw(screen, camera_x)
 
     # Ground
     for sx in range(WIDTH):
@@ -135,16 +133,16 @@ def draw():
     # Collectibles
     collectibles.draw(screen, camera_x)
 
-    # Cyclist (rotated blit)
-    surf = frames[runner.index]
-    angle_deg = -math.degrees(runner_angle_rad)
-    rot = pygame.transform.rotozoom(surf, angle_deg, 1.0)
-    center_to_anchor = pygame.Vector2(0, H/2 - MARGIN_BOTTOM)
-    rot_offset = center_to_anchor.rotate(angle_deg)
-    cx = runner.x - rot_offset.x
-    cy = runner_anchor_y - rot_offset.y
-    rect = rot.get_rect(center=(cx, cy))
-    screen.blit(rot, rect)
+    # # Cyclist (rotated blit)
+    # surf = frames[runner.index]
+    # angle_deg = -math.degrees(runner_angle_rad)
+    # rot = pygame.transform.rotozoom(surf, angle_deg, 1.0)
+    # center_to_anchor = pygame.Vector2(0, H/2 - MARGIN_BOTTOM)
+    # rot_offset = center_to_anchor.rotate(angle_deg)
+    # cx = runner.x - rot_offset.x
+    # cy = runner_anchor_y - rot_offset.y
+    # rect = rot.get_rect(center=(cx, cy))
+    # screen.blit(rot, rect)
 
     # HUD (no best-today / best-alltime lines)
     seconds_left = max(0, timer_frames // FPS)
@@ -167,33 +165,20 @@ def update():
     global runner_angle_rad, runner_anchor_y
     global energy_total, timer_frames, game_over, end_message
     global prev_world_x, prev_ground_y, store
-
+    
+    
     if game_over:
         return
+    
+    runner.update(camera_x, terrain.get_ground_height)
+    runner.animate(frame_counter)
+    camera_x += runner.speed
 
     # Animation
     frame_counter += 1
-    if frame_counter % 10 == 0:
-        runner.index = (runner.index + 1) % len(frames)
-
-    # Sample terrain at wheel positions
-    d = WHEEL_BASE
-    xL = camera_x + runner.x - d / 2
-    xR = camera_x + runner.x + d / 2
-    yL = terrain.get_ground_height(xL)
-    yR = terrain.get_ground_height(xR)
-
-    # Tilt and speed
-    runner_angle_rad = math.atan2(yR - yL, d)
-    slope = (yR - yL) / d
-    runner_speed -= slope * 0.6
-    runner_speed *= 0.99
-    runner_speed = max(2, min(runner_speed, 10))
-
-    # Move world and anchor
-    camera_x += runner_speed
-    runner_anchor_y = (yL + yR) / 2
-
+    frame_counter += 1
+    runner.animate(frame_counter)
+        
     # Distance/elevation since last frame
     world_x = camera_x + runner.x
     dx = max(0.0, world_x - prev_world_x)
@@ -231,8 +216,30 @@ def update():
         store, ranks = add_score_with_ranks(store, entry)
         end_message = build_rank_message(ranks)
 
+        """ # Sample terrain at wheel positions
+            d = WHEEL_BASE
+            xL = camera_x + runner.x - d / 2
+            xR = camera_x + runner.x + d / 2
+            yL = terrain.get_ground_height(xL)
+            yR = terrain.get_ground_height(xR)
+
+            # Tilt and speed
+            runner_angle_rad = math.atan2(yR - yL, d)
+            slope = (yR - yL) / d
+            runner_speed -= slope * 0.6
+            runner_speed *= 0.99
+            runner_speed = max(2, min(runner_speed, 10))
+
+            # Move world and anchor
+            camera_x += runner_speed
+            runner_anchor_y = (yL + yR) / 2"""
+
+    
+
 def on_key_down(key):
     if key == keys.R and game_over:
         reset_game()
+    if not game_over:
+        runner.cycle(key)
 
 pgzrun.go()
