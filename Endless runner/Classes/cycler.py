@@ -37,7 +37,7 @@ class Cycler:
 
     self.angle_rad = math.atan2(yR - yL, d)
     slope = (yR - yL) / d
-    self.speed -= slope * 0.6
+    self.speed += slope * 0.6
     self.speed *= 0.99
     # Abbremsen wenn keine Taste gedrückt
     self.speed -= self.SUB_SPEED
