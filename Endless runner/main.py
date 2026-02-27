@@ -2,10 +2,10 @@ import pgzrun
 import math
 import pygame
 from datetime import datetime
-from terrain import Terrain
-from collectibles import create_manager
-from assets import build_frames
-from highscores import load_store, add_score_with_ranks  # no best_* imports now
+from Classes.terrain import Terrain
+from Classes.collectibles import create_manager
+from Classes.assets import build_frames
+from Classes.highscores import load_store, add_score_with_ranks  # no best_* imports now
 
 WIDTH = 480
 HEIGHT = 720

@@ -26,10 +26,64 @@
       "duration_sec": 10,
       "avg_power_w": null,
       "avg_speed": 242.17181771745862
+    },
+    {
+      "name": "PlayerOne",
+      "score": 2222.30665781359,
+      "date": "2026-02-27",
+      "energy_kj": 2222.30665781359,
+      "duration_sec": 10,
+      "avg_power_w": null,
+      "avg_speed": 242.17181771745862
+    },
+    {
+      "name": "PlayerOne",
+      "score": 2222.30665781359,
+      "date": "2026-02-27",
+      "energy_kj": 2222.30665781359,
+      "duration_sec": 10,
+      "avg_power_w": null,
+      "avg_speed": 242.17181771745862
+    },
+    {
+      "name": "PlayerOne",
+      "score": 2222.30665781359,
+      "date": "2026-02-27",
+      "energy_kj": 2222.30665781359,
+      "duration_sec": 10,
+      "avg_power_w": null,
+      "avg_speed": 242.17181771745862
     }
   ],
   "daily": {
     "2026-02-27": [
+      {
+        "name": "PlayerOne",
+        "score": 2222.30665781359,
+        "date": "2026-02-27",
+        "energy_kj": 2222.30665781359,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 242.17181771745862
+      },
+      {
+        "name": "PlayerOne",
+        "score": 2222.30665781359,
+        "date": "2026-02-27",
+        "energy_kj": 2222.30665781359,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 242.17181771745862
+      },
+      {
+        "name": "PlayerOne",
+        "score": 2222.30665781359,
+        "date": "2026-02-27",
+        "energy_kj": 2222.30665781359,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 242.17181771745862
+      },
       {
         "name": "PlayerOne",
         "score": 2222.30665781359,
@@ -80,6 +134,24 @@
         "avg_speed": 242.17181771745862
       },
       {
+        "name": "PlayerOne",
+        "score": 2222.30665781359,
+        "date": "2026-02-27",
+        "energy_kj": 2222.30665781359,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 242.17181771745862
+      },
+      {
+        "name": "PlayerOne",
+        "score": 2222.30665781359,
+        "date": "2026-02-27",
+        "energy_kj": 2222.30665781359,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 242.17181771745862
+      },
+      {
         "name": "Unknown",
         "score": 2479.0,
         "date": "2026-02-27",
@@ -111,6 +183,24 @@
         "avg_speed": 242.17181771745862
       },
       {
+        "name": "PlayerOne",
+        "score": 2222.30665781359,
+        "date": "2026-02-27",
+        "energy_kj": 2222.30665781359,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 242.17181771745862
+      },
+      {
+        "name": "PlayerOne",
+        "score": 2222.30665781359,
+        "date": "2026-02-27",
+        "energy_kj": 2222.30665781359,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 242.17181771745862
+      },
+      {
         "name": "Unknown",
         "score": 2479.0,
         "date": "2026-02-27",
@@ -122,6 +212,24 @@
     ]
   },
   "alltime": [
+    {
+      "name": "PlayerOne",
+      "score": 2222.30665781359,
+      "date": "2026-02-27",
+      "energy_kj": 2222.30665781359,
+      "duration_sec": 10,
+      "avg_power_w": null,
+      "avg_speed": 242.17181771745862
+    },
+    {
+      "name": "PlayerOne",
+      "score": 2222.30665781359,
+      "date": "2026-02-27",
+      "energy_kj": 2222.30665781359,
+      "duration_sec": 10,
+      "avg_power_w": null,
+      "avg_speed": 242.17181771745862
+    },
     {
       "name": "PlayerOne",
       "score": 2222.30665781359,
