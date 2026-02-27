@@ -62,10 +62,28 @@
       "duration_sec": 10,
       "avg_power_w": null,
       "avg_speed": 318.1631686322337
+    },
+    {
+      "name": "PlayerOne",
+      "score": 0.0,
+      "date": "2026-02-27",
+      "energy_kj": 0.0,
+      "duration_sec": 10,
+      "avg_power_w": null,
+      "avg_speed": 0.0
     }
   ],
   "daily": {
     "2026-02-27": [
+      {
+        "name": "PlayerOne",
+        "score": 0.0,
+        "date": "2026-02-27",
+        "energy_kj": 0.0,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 0.0
+      },
       {
         "name": "PlayerOne",
         "score": 2222.30665781359,
