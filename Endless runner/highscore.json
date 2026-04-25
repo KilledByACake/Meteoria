@@ -71,6 +71,42 @@
       "duration_sec": 10,
       "avg_power_w": null,
       "avg_speed": 0.0
+    },
+    {
+      "name": "PlayerOne",
+      "score": 3140.2539958732773,
+      "date": "2026-03-16",
+      "energy_kj": 3140.2539958732773,
+      "duration_sec": 10,
+      "avg_power_w": null,
+      "avg_speed": 348.87535293930694
+    },
+    {
+      "name": "PlayerOne",
+      "score": 713.8567989842467,
+      "date": "2026-03-21",
+      "energy_kj": 713.8567989842467,
+      "duration_sec": 10,
+      "avg_power_w": null,
+      "avg_speed": 83.76753781511175
+    },
+    {
+      "name": "PlayerOne",
+      "score": 5785.4439202026115,
+      "date": "2026-03-21",
+      "energy_kj": 5785.4439202026115,
+      "duration_sec": 10,
+      "avg_power_w": null,
+      "avg_speed": 624.7754844789245
+    },
+    {
+      "name": "PlayerOne",
+      "score": 4765.528157067732,
+      "date": "2026-03-21",
+      "energy_kj": 4765.528157067732,
+      "duration_sec": 10,
+      "avg_power_w": null,
+      "avg_speed": 516.890115298455
     }
   ],
   "daily": {
@@ -147,6 +183,46 @@
         "avg_power_w": null,
         "avg_speed": 318.1631686322337
       }
+    ],
+    "2026-03-16": [
+      {
+        "name": "PlayerOne",
+        "score": 3140.2539958732773,
+        "date": "2026-03-16",
+        "energy_kj": 3140.2539958732773,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 348.87535293930694
+      }
+    ],
+    "2026-03-21": [
+      {
+        "name": "PlayerOne",
+        "score": 713.8567989842467,
+        "date": "2026-03-21",
+        "energy_kj": 713.8567989842467,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 83.76753781511175
+      },
+      {
+        "name": "PlayerOne",
+        "score": 4765.528157067732,
+        "date": "2026-03-21",
+        "energy_kj": 4765.528157067732,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 516.890115298455
+      },
+      {
+        "name": "PlayerOne",
+        "score": 5785.4439202026115,
+        "date": "2026-03-21",
+        "energy_kj": 5785.4439202026115,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 624.7754844789245
+      }
     ]
   },
   "monthly": {
@@ -196,37 +272,48 @@
         "avg_power_w": null,
         "avg_speed": 318.1631686322337
       }
+    ],
+    "2026-03": [
+      {
+        "name": "PlayerOne",
+        "score": 713.8567989842467,
+        "date": "2026-03-21",
+        "energy_kj": 713.8567989842467,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 83.76753781511175
+      },
+      {
+        "name": "PlayerOne",
+        "score": 3140.2539958732773,
+        "date": "2026-03-16",
+        "energy_kj": 3140.2539958732773,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 348.87535293930694
+      },
+      {
+        "name": "PlayerOne",
+        "score": 4765.528157067732,
+        "date": "2026-03-21",
+        "energy_kj": 4765.528157067732,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 516.890115298455
+      },
+      {
+        "name": "PlayerOne",
+        "score": 5785.4439202026115,
+        "date": "2026-03-21",
+        "energy_kj": 5785.4439202026115,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 624.7754844789245
+      }
     ]
   },
   "yearly": {
     "2026": [
-      {
-        "name": "PlayerOne",
-        "score": 2222.30665781359,
-        "date": "2026-02-27",
-        "energy_kj": 2222.30665781359,
-        "duration_sec": 10,
-        "avg_power_w": null,
-        "avg_speed": 242.17181771745862
-      },
-      {
-        "name": "PlayerOne",
-        "score": 2222.30665781359,
-        "date": "2026-02-27",
-        "energy_kj": 2222.30665781359,
-        "duration_sec": 10,
-        "avg_power_w": null,
-        "avg_speed": 242.17181771745862
-      },
-      {
-        "name": "PlayerOne",
-        "score": 2222.30665781359,
-        "date": "2026-02-27",
-        "energy_kj": 2222.30665781359,
-        "duration_sec": 10,
-        "avg_power_w": null,
-        "avg_speed": 242.17181771745862
-      },
       {
         "name": "Unknown",
         "score": 2479.0,
@@ -244,37 +331,37 @@
         "duration_sec": 10,
         "avg_power_w": null,
         "avg_speed": 318.1631686322337
+      },
+      {
+        "name": "PlayerOne",
+        "score": 3140.2539958732773,
+        "date": "2026-03-16",
+        "energy_kj": 3140.2539958732773,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 348.87535293930694
+      },
+      {
+        "name": "PlayerOne",
+        "score": 4765.528157067732,
+        "date": "2026-03-21",
+        "energy_kj": 4765.528157067732,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 516.890115298455
+      },
+      {
+        "name": "PlayerOne",
+        "score": 5785.4439202026115,
+        "date": "2026-03-21",
+        "energy_kj": 5785.4439202026115,
+        "duration_sec": 10,
+        "avg_power_w": null,
+        "avg_speed": 624.7754844789245
       }
     ]
   },
   "alltime": [
-    {
-      "name": "PlayerOne",
-      "score": 2222.30665781359,
-      "date": "2026-02-27",
-      "energy_kj": 2222.30665781359,
-      "duration_sec": 10,
-      "avg_power_w": null,
-      "avg_speed": 242.17181771745862
-    },
-    {
-      "name": "PlayerOne",
-      "score": 2222.30665781359,
-      "date": "2026-02-27",
-      "energy_kj": 2222.30665781359,
-      "duration_sec": 10,
-      "avg_power_w": null,
-      "avg_speed": 242.17181771745862
-    },
-    {
-      "name": "PlayerOne",
-      "score": 2222.30665781359,
-      "date": "2026-02-27",
-      "energy_kj": 2222.30665781359,
-      "duration_sec": 10,
-      "avg_power_w": null,
-      "avg_speed": 242.17181771745862
-    },
     {
       "name": "Unknown",
       "score": 2479.0,
@@ -292,6 +379,33 @@
       "duration_sec": 10,
       "avg_power_w": null,
       "avg_speed": 318.1631686322337
+    },
+    {
+      "name": "PlayerOne",
+      "score": 3140.2539958732773,
+      "date": "2026-03-16",
+      "energy_kj": 3140.2539958732773,
+      "duration_sec": 10,
+      "avg_power_w": null,
+      "avg_speed": 348.87535293930694
+    },
+    {
+      "name": "PlayerOne",
+      "score": 4765.528157067732,
+      "date": "2026-03-21",
+      "energy_kj": 4765.528157067732,
+      "duration_sec": 10,
+      "avg_power_w": null,
+      "avg_speed": 516.890115298455
+    },
+    {
+      "name": "PlayerOne",
+      "score": 5785.4439202026115,
+      "date": "2026-03-21",
+      "energy_kj": 5785.4439202026115,
+      "duration_sec": 10,
+      "avg_power_w": null,
+      "avg_speed": 624.7754844789245
     }
   ]
 }
